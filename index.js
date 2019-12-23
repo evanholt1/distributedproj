@@ -11,11 +11,11 @@ const router = require('./routes/router.js');
 let MongoDBStore = mongoStore(session);
 
 var store = new MongoDBStore({
-  uri: process.env.DB_CONNECT,
+  uri: "mongodb+srv://evan:evan@mern-xupmz.mongodb.net/test?retryWrites=true&w=majority",
   collection: 'distributedSessions'
 });
 
-mongoose.connect(process.env.DB_CONNECT,
+mongoose.connect("mongodb+srv://evan:evan@mern-xupmz.mongodb.net/test?retryWrites=true&w=majority",
   {useNewUrlParser:true,useUnifiedTopology:true},
   function(err) {
   
