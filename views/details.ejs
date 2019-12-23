@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User Details</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+      body {
+        background-image: url("../images/details.jpg");
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".navbar-collapse"></button>    
+      <a class="navbar-brand-center mx-auto " href="/" style="color:rgb(244, 98, 58);"><h1 class='mr-n4'>Website</h1></a>
+      <form class="form-inline" action='logout' method='POST'>
+        <button type="submit" class="btn btn-primary mb-2">Logout</button>
+      </form>
+    </nav>
+
+    <div class="container mt-4">
+    <div class="row">
+        <!-- edit form column -->
+        <div class="col-md-12 personal-info signup-content">
+          <h3>Personal info</h3>
+
+          <form class="form-horizontal" role="form" method='POST' action='updateAccount?_method=PUT'>
+            <label for="form-row1">Name</label>
+            <div class="form-row mb-3" id='form-row1'>
+              <div class="col">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="First name" name='firstName' value='<%= user.firstName %>'>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Last name" name='lastName' value='<%= user.lastName %>'>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mt-n3">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" name='email' id="email" aria-describedby="emailHelp" placeholder="Email" value='<%= user.email %>'>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password" name='password' value='<%= user.password %>'>
+              <span toggle="#password" class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+            </div>
+            <button type="submit" name='update' class="btn btn-primary">Update</button>
+            <button type="reset" class="btn btn-primary ml-2">Reset</button>
+          </form>
+          <form role="form" action="deleteAccount?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger float-right mt-n1">Delete Account</button>
+          </form>
+        </div>
+    </div>
+  </div>
+  <hr>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

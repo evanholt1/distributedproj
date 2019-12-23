@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form </title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 main">
+      <div class="signup-content">
+
+        <form method="POST" action='signup' id="signup-form" class="signup-form">
+          <h2 class="form-title mb-3">Create account</h2>
+          <div class="form-row mb-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="First name" name='firstName'>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Last name" name='lastName'>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-control" name="email" id='email' placeholder="Your Email"/>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
+            <span toggle="#password" class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" name="re_password" id="re_password" placeholder="Repeat password"/>
+            <span toggle="#re_password" class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+          </div>
+          <div class="form-group">
+            <input type="submit" name="submit" id="submit" class="form-submit mt-4" value="Sign up"/>
+            
+          </div>
+        </form>
+        <p class="text-center mt-4">
+        Have already an account ? <a href="login" class="loginhere-link">Login here!</a>
+        </p>
+        <div ><!-- For server results -->
+          <h4 id="server-results"></h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+      $('#signup-form').submit(function(event){
+        event.preventDefault();      
+        var action = $(this).attr("action"); //get form action url
+        var method = $(this).attr("method"); //get form GET/POST method
+        $.ajax({
+          type: method,
+          data:$(this).serializeArray(),
+          url:action,
+        }).done(function(data, textStatus, jqXHR){
+          // display the info box, then remove it after 2 seconds
+          $("#server-results").html(data);
+          $("#server-results").addClass('text-center border border-danger rounded m-2 p-2');
+          setTimeout(function(){
+            $("#server-results").html("");
+            $("#server-results").removeClass('text-center border border-danger rounded m-2 p-2');
+          },2000);
+          // direct to login page after signing up
+          if(jqXHR.status==202) {
+            setTimeout(function() {
+              window.location.href = '/login';
+            },2000);
+          };
+        });
+      });
+    </script>
+</body>
+</html>

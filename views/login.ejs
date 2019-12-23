@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log In Form </title>
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 signup-content ">
+                <form method='POST' action="login" class='signup-form' id='signup-form'>
+                    <h2 class='mb-4 mt-n4'>Login</h2>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" id='email' placeholder="Your Email"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password"/>
+                        <span toggle="#password" class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+                    </div>
+                    <input type="submit" name="submit" id="submit" class="form-submit mt-4 btn-sm" value="Log In">
+                </form>
+                <div>
+                  <p class="text-center mt-4">
+                    Don't have an account ? <a href="signup" class="loginhere-link">Sign Up!</a>
+                  </p>
+                </div>
+                <div><!-- For server results -->
+                  <h4 id="server-results"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      $('#signup-form').submit(function(event){
+        event.preventDefault();      
+        var action = $(this).attr("action"); //get form action url
+        var method = $(this).attr("method"); //get form GET/POST method
+        $.ajax({
+          type: method,
+          data:$(this).serializeArray(),
+          url:action,
+          error: function (xhr, ajaxOptions, thrownError) {
+            $("#server-results").html(xhr.responseText);
+            $("#server-results").addClass('text-center border border-danger rounded m-2 p-2');
+            setTimeout(function(){
+              $("#server-results").html("");
+              $("#server-results").removeClass('text-center border border-danger rounded m-2 p-2');
+            },2000);
+          }
+        }).done(function(data, textStatus, jqXHR){
+          // display the info box, then remove it after 2 seconds
+          if(data) {
+            $("#server-results").html(data);
+            $("#server-results").addClass('text-center border border-danger rounded m-2 p-2');
+            setTimeout(function(){
+              $("#server-results").html("");
+              $("#server-results").removeClass('text-center border border-danger rounded m-2 p-2');
+            },2000);
+          }
+            
+          // if user found
+          if(jqXHR.status==202) {
+            setTimeout(function() {
+              window.location.href = '/details';
+            },2000);
+          };
+        });
+      });
+    </script>
+</body>
+</html>
