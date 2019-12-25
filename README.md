@@ -7,10 +7,19 @@ Inside, the user model/class/schema is defined to be made up of
   * email
   * password
   * first name
-  * last name
+  * last name  
 basic validation on those fields is implemented.
 
 The purpose is the ability to Create,Read,Update,and Delete (hence a CRUD/REST API) user info.
 All data is stored on a MongoDB Atlas store (MongoDB cloud service).
 Sessions are also used to keep user data.
+
+Tools used:
+ * Front-End: 
+  - bootstrap
+  - ejs
+ * Back-End:
+  - Nodejs (expressjs)
+ * Database:
+  - MongoDB (mongoose), through MongoDB Atlas Cloud database
 "
